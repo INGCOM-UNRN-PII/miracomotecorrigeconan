@@ -25,7 +25,7 @@ pprint(f"procesando: {practicas}")
 
 for tp in practicas:
     print(f"Repositorio: {tp} / {timestamp}")
-    with open(f"reporte-{tp}.md", "w") as informe:
+    with open(f"{tp}.md", "w") as informe:
         informe.write(f"# Informe creado el {timestamp}\n")
         informe.write("\n\nImportante, este informe no es el resultado de la corrección (eso es en un comentario separado.\n\n")
         informe.write("![Mira como te revisa conan](https://github.com/INGCOM-UNRN-PII/cursada-2024/blob/main/plantel/bot/conan.png?raw=true)\n")
