@@ -34,9 +34,6 @@ if [ -d "tp2-2024-submissions/$1" ]; then
         xsltproc stylesheets/junit.xsl $filename >> mensaje.md
     done
 
-    # cat mensaje.md
     echo "Informe listo en $1.md"
-    # gh pr comment https://github.com/INGCOM-UNRN-PII/$1/pull/1 -F mensaje.md
-
     mv mensaje.md $1.md
 fi
