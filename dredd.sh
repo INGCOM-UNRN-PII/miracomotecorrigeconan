@@ -34,6 +34,10 @@ if [ -d "$repo" ]; then
 
     echo "Informe listo en $2.md"
     mv mensaje.md $2.md
+
+    echo "para completar el siguiente paso:"
+    echo "./comment.sh $2"
+
 else
     echo "Clonando el repositorio si no lo estaba para $repo, ejecutar una segunda vez para verificar"
     git clone git@github.com:INGCOM-UNRN-PII/$1.git $repo
