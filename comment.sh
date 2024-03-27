@@ -1,10 +1,11 @@
 #!/usr/bin/bash
 
-echo "Procesando comentarios de corrección para tp2-2024-submissions/$1"
+echo "Procesando comentarios de corrección para $1"
 
-if [ -d "tp2-2024-submissions/$1" ]; then
-
+if [ -f "$1.md" ]; then
     gh pr comment https://github.com/INGCOM-UNRN-PII/$1/pull/1 -F $1.md
-    echo https://github.com/INGCOM-UNRN-PII/$1/pull/1/files
-    
+    echo "https://github.com/INGCOM-UNRN-PII/$1/pull/1/files"
+else
+    echo "El reporte '$1.md' no fue encontrado"
+    echo "Parece que dredd no pasó por acá aún."
 fi
