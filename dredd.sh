@@ -4,6 +4,8 @@ echo "Procesando $1-submissions/$2"
 repo="$1-submissions/$2"
 
 if [ -d "$repo" ]; then
+    mv "$2" "old_$2"
+
     echo "git pull en el repositorio $repo"
     git -C $repo pull
 
@@ -19,13 +21,13 @@ if [ -d "$repo" ]; then
     printf "\n## Checkstyle código" >> mensaje.md
     xsltproc stylesheets/checkstyle.xsl $repo/build/reports/checkstyle/main.xml | sed s@$PWD\/@@ - >> mensaje.md
 
-    printf "\n## Checkstyle tests" >> mensaje.md
-    xsltproc stylesheets/checkstyle.xsl $repo/build/reports/checkstyle/test.xml | sed s@$PWD\/@@ - >> mensaje.md
+#    printf "\n## Checkstyle tests" >> mensaje.md
+#    xsltproc stylesheets/checkstyle.xsl $repo/build/reports/checkstyle/test.xml | sed s@$PWD\/@@ - >> mensaje.md
 
     printf "\n## PMD código" >> mensaje.md
     xsltproc stylesheets/pmd.xsl $repo/build/reports/pmd/main.xml | sed s@$PWD\/@@ - >> mensaje.md
-    printf "\n## PMD tests" >> mensaje.md
-    xsltproc stylesheets/pmd.xsl $repo/build/reports/pmd/test.xml | sed s@$PWD\/@@ - >> mensaje.md
+#    printf "\n## PMD tests" >> mensaje.md
+#    xsltproc stylesheets/pmd.xsl $repo/build/reports/pmd/test.xml | sed s@$PWD\/@@ - >> mensaje.md
 
     printf "\n## Conan ejecuta los Tests" >> mensaje.md
     for filename in $repo/build/test-results/test/*.xml; do
