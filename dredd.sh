@@ -4,7 +4,7 @@ echo "Procesando $1-submissions/$2"
 repo="$1-submissions/$2"
 
 if [ -d "$repo" ]; then
-    mv "$2" "old_$2"
+    mv "$2.md" "old_$2.md"
 
     echo "git pull en el repositorio $repo"
     git -C $repo pull
