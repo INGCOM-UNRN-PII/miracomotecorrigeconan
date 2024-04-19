@@ -42,6 +42,6 @@ if [ -d "$repo" ]; then
 
 else
     echo "Clonando el repositorio si no lo estaba para $repo, ejecutar una segunda vez para verificar"
-    git clone git@github.com:INGCOM-UNRN-PII/$1.git $repo
+    git clone https://github.com/INGCOM-UNRN-PII/$1.git $repo
 
 fi
