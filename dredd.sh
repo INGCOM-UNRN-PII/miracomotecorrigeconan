@@ -7,7 +7,19 @@ if [ -d "$repo" ]; then
     mv "$2.md" "old_$2.md"
 
     echo "git pull en el repositorio $repo"
+    git -C $repo restore "*"
     git -C $repo pull
+
+git_pull_output=$(git -C $repo pull 2>&1)
+
+if [[ $git_pull_output == *"Already up to date."* ]]; then
+    echo "El repositorio ya estaba actualizado."
+else
+    echo "No se puede continuar, ha ocurrido un error en git."
+    echo "Git dice\n: $git_pull_output"
+    exit 2
+fi
+
 
     echo "ejecutando verificaciones con gradle wrapper"
 
@@ -18,6 +30,7 @@ if [ -d "$repo" ]; then
     echo "creacion del informe"
 
     printf "\n# El Juez Dredd" > mensaje.md
+    printf "\n**branch/revision:** %s %s", "$(git rev-parse --abbrev-ref HEAD)", "$(git rev-parse --short HEAD)" >> mensaje.md
     printf "\n## Checkstyle código" >> mensaje.md
     xsltproc stylesheets/checkstyle.xsl $repo/build/reports/checkstyle/main.xml | sed s@$PWD\/@@ - >> mensaje.md
 
