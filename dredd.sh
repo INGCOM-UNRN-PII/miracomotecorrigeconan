@@ -12,7 +12,7 @@ if [ -d "$repo" ]; then
 
 git_pull_output=$(git -C $repo pull 2>&1)
 
-if [[ $git_pull_output == *"Already up to date."* ]]; then
+if [[ $git_pull_output == *"Already up to date."* || $git_pull_output == *"Ya está actualizado."* ]]; then
     echo "El repositorio ya estaba actualizado."
 else
     echo "No se puede continuar, ha ocurrido un error en git."
@@ -30,7 +30,7 @@ fi
     echo "creacion del informe"
 
     printf "\n# El Juez Dredd" > mensaje.md
-    printf "\n**branch/revision:** %s %s", "$(git rev-parse --abbrev-ref HEAD)", "$(git rev-parse --short HEAD)" >> mensaje.md
+    printf "\n**branch/revision:** %s %s", "$(git -C $repo rev-parse --abbrev-ref HEAD)", "$(git -C $repo rev-parse --short HEAD)" >> mensaje.md
     printf "\n## Checkstyle código" >> mensaje.md
     xsltproc stylesheets/checkstyle.xsl $repo/build/reports/checkstyle/main.xml | sed s@$PWD\/@@ - >> mensaje.md
 
@@ -49,6 +49,8 @@ fi
 
     echo "Informe listo en $2.md"
     mv mensaje.md $2.md
+
+    printf "\n\t branch: %s \trevision: %s", "$(git -C $repo rev-parse --abbrev-ref HEAD)", "$(git -C $repo rev-parse --short HEAD)" >> mensaje.md
 
     echo "para completar el siguiente paso:"
     echo "./comment.sh $2"
