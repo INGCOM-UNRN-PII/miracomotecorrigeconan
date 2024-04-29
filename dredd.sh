@@ -4,8 +4,6 @@ echo "Procesando $1-submissions/$2"
 repo="$1-submissions/$2"
 
 if [ -d "$repo" ]; then
-    mv "$2.md" "old_$2.md"
-
     echo "git pull en el repositorio $repo"
     git -C $repo restore "*"
     git -C $repo pull
@@ -57,6 +55,8 @@ fi
 
 else
     echo "Clonando el repositorio si no lo estaba para $repo, ejecutar una segunda vez para verificar"
-    git clone https://github.com/INGCOM-UNRN-PII/$1.git $repo
+#    git clone https://github.com/INGCOM-UNRN-PII/$1.git $repo
+    git clone git@github.com:INGCOM-UNRN-PII/$1.git $repo
+
 
 fi
