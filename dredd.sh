@@ -50,7 +50,7 @@ fi
     echo "Informe listo en $2.md"
     mv mensaje.md $2.md
 
-    printf "\n\t branch: %s \trevision: %s", "$(git -C $repo rev-parse --abbrev-ref HEAD)", "$(git -C $repo rev-parse --short HEAD)" >> mensaje.md
+    printf "\n\t branch: %s \trevision: %s", "$(git -C $repo rev-parse --abbrev-ref HEAD)", "$(git -C $repo rev-parse --short HEAD)"
 
     echo "para completar el siguiente paso:"
     echo "./comment.sh $2"
