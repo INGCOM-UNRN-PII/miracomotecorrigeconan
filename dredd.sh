@@ -48,7 +48,9 @@ fi
     echo "Informe listo en $2.md"
     mv mensaje.md $2.md
 
-    printf "\n\t branch: %s \trevision: %s", "$(git -C $repo rev-parse --abbrev-ref HEAD)", "$(git -C $repo rev-parse --short HEAD)"
+    printf "\nbranch: %s \trevision: %s\n", "$(git -C $repo rev-parse --abbrev-ref HEAD)", "$(git -C $repo rev-parse --short HEAD)"
+
+    git -C $repo log -n 5 --oneline origin/main
 
     echo "para completar el siguiente paso:"
     echo "./comment.sh $2"
