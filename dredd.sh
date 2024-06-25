@@ -26,8 +26,8 @@ fi
 #    cp -fv build.gradle.base $repo/build.gradle     # Desactivamos el Hotfix para no bloquear los pull
 
     echo "creacion del informe"
-
-    printf "\n# El Juez Dredd" > mensaje.md
+    cat informe/header.md > mensaje.md
+    printf "\n# El Juez Dredd" >> mensaje.md
     printf "\n**branch/revision:** %s %s", "$(git -C $repo rev-parse --abbrev-ref HEAD)", "$(git -C $repo rev-parse --short HEAD)" >> mensaje.md
     printf "\n## Checkstyle código" >> mensaje.md
     xsltproc stylesheets/checkstyle.xsl $repo/build/reports/checkstyle/main.xml | sed s@$PWD\/@@ - >> mensaje.md
@@ -44,7 +44,9 @@ fi
     for filename in $repo/build/test-results/test/*.xml; do
         xsltproc stylesheets/junit.xsl $filename >> mensaje.md
     done
-
+    
+    cat informe/footer.md >> mensaje.md
+        
     echo "Informe listo en $2.md"
     mv mensaje.md $2.md
 
@@ -58,8 +60,8 @@ fi
 else
     echo "Clonando el repositorio si no lo estaba para $repo, ejecutar una segunda vez para verificar"
     echo "INGCOM-UNRN-PII/$2.git"
-#    git clone https://github.com/INGCOM-UNRN-PII/$1.git $repo
-    git clone git@github.com:INGCOM-UNRN-PII/$2.git $repo
+    git clone https://github.com/INGCOM-UNRN-PII/$2.git $repo
+    #git clone git@github.com:INGCOM-UNRN-PII/$2.git $repo
 
 
 fi
