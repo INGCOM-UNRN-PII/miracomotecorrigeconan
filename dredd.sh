@@ -21,9 +21,9 @@ fi
 
     echo "ejecutando verificaciones con gradle wrapper"
 
-#    cp -fv build.gradle.timeout $repo/build.gradle  # Hotfix para activar timeout
+    cp -fv build.gradle.jacocofix $repo/build.gradle  # Hotfix para ignorar el Loader (y activar jacoco donde no exista)
     ./$repo/gradlew -p $repo check
-#    cp -fv build.gradle.base $repo/build.gradle     # Desactivamos el Hotfix para no bloquear los pull
+    cp -fv build.gradle.base $repo/build.gradle     # Desactivamos el Hotfix para no bloquear los pull
 
     echo "creacion del informe"
     cat informe/header.md > mensaje.md
@@ -45,6 +45,9 @@ fi
         xsltproc stylesheets/junit.xsl $filename >> mensaje.md
     done
     
+    printf "\n## Covertura de Tests" >> mensaje.md
+    xsltproc stylesheets/jacoco.xsl $repo/build/reports/jacoco/test/jacocoTestReport.xml >> mensaje.md
+    
     cat informe/footer.md >> mensaje.md
         
     echo "Informe listo en $2.md"
@@ -60,8 +63,8 @@ fi
 else
     echo "Clonando el repositorio si no lo estaba para $repo, ejecutar una segunda vez para verificar"
     echo "INGCOM-UNRN-PII/$2.git"
-    git clone https://github.com/INGCOM-UNRN-PII/$2.git $repo
-    #git clone git@github.com:INGCOM-UNRN-PII/$2.git $repo
+    #git clone https://github.com/INGCOM-UNRN-PII/$2.git $repo
+    git clone git@github.com:INGCOM-UNRN-PII/$2.git $repo
 
 
 fi

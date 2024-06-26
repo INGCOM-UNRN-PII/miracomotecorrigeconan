@@ -1,0 +1,76 @@
+import java.time.Duration
+
+plugins {
+    id 'java'
+    id 'pmd'
+    id 'checkstyle'
+    id 'application'
+    id("com.github.spotbugs") version "6.0.7"
+    id 'jacoco'
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+application {
+    mainClass = "ar.unrn.LoaderApp"
+}
+
+run {
+    standardInput = System.in
+}
+
+group = 'ar.unrn'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+//    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.12.0'
+}
+
+test {
+    useJUnitPlatform()
+    timeout = Duration.ofMinutes(1) // Un minuto para resolver cuelgues en los tests.
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+    reports {
+        xml.required = true
+        csv.required = true
+    }
+}
+
+pmd {
+    consoleOutput = true
+    ignoreFailures = true
+    toolVersion = "6.55.0"
+    rulesMinimumPriority = 5
+    ruleSetFiles = files("config/pmd/programacion2.xml")
+    ruleSets = []
+}
+
+spotbugs {
+    toolVersion = '4.8.3'
+}
+
+checkstyle {
+    toolVersion '10.9.2'
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    source = 'src/test/java'
+}
