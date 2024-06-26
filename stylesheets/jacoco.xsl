@@ -4,14 +4,13 @@
 
     <!-- Template to match the root element -->
     <xsl:template match="/">
-# JaCoCo Report
         <xsl:apply-templates select="//package" />
     </xsl:template>
 
     <!-- Template to transform package elements -->
     <xsl:template match="package">
         <xsl:text>&#10;</xsl:text>
-        <xsl:text>## Paquete: </xsl:text><xsl:value-of select="@name" />
+        <xsl:text>### Paquete: </xsl:text><xsl:value-of select="@name" />
         <xsl:text>&#10;</xsl:text>
         <xsl:apply-templates select="class" />
         <xsl:text>&#10;</xsl:text>
@@ -20,7 +19,7 @@
     <!-- Template to transform class elements -->
     <xsl:template match="class">
         <xsl:text>&#10;</xsl:text>
-        <xsl:text>### Clase: </xsl:text><xsl:value-of select="@name" />
+        <xsl:text>#### Clase: </xsl:text><xsl:value-of select="@name" />
         <xsl:text>&#10;</xsl:text>
         <xsl:apply-templates select="method" />
         <xsl:text>&#10;</xsl:text>
@@ -29,7 +28,7 @@
     <!-- Template to transform method elements -->
     <xsl:template match="method">
         <xsl:text>&#10;</xsl:text>
-        <xsl:text>#### Método: </xsl:text><xsl:value-of select="@name" />
+        <xsl:text>##### Método: </xsl:text><xsl:value-of select="@name" />
         <xsl:text>&#10;</xsl:text>
         <xsl:apply-templates select="counter" />
         <xsl:text>&#10;</xsl:text>
