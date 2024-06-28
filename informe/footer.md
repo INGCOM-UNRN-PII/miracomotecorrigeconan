@@ -1,6 +1,8 @@
 
 ## Rúbrica
 
+(Espacio a completar)
+
 |           Ítem Rubrica          | Puntaje máximo | Puntaje asignado |
 |:-------------------------------:|:--------------:|:----------------:|
 |    Funcionalidad del Proyecto   |       20       |                  |
@@ -14,5 +16,5 @@
 |       Interfaz de usuario       |        5       |                  |
 |                                 |      Total     |                  |
 
-_Según [rúbrica completa](https://github.com/orgs/INGCOM-UNRN-PII/discussions/249)
+_Según [rúbrica completa](https://github.com/orgs/INGCOM-UNRN-PII/discussions/249)_
 
