@@ -71,6 +71,27 @@ spotbugs {
     toolVersion = '4.8.3'
 }
 
+spotbugsMain {
+    reports {
+      html {
+        enabled = true
+      }
+      xml {
+        enabled = true
+      }
+    }
+}
+spotbugsTest {
+    reports {
+      html {
+        enabled = true
+      }
+      xml {
+        enabled = true
+      }
+    }
+}
+
 checkstyle {
     toolVersion '10.9.2'
 }
