@@ -63,8 +63,7 @@ fi
 else
     echo "Clonando el repositorio si no lo estaba para $repo, ejecutar una segunda vez para verificar"
     echo "INGCOM-UNRN-PII/$2.git"
-    #git clone https://github.com/INGCOM-UNRN-PII/$2.git $repo
-    git clone git@github.com:INGCOM-UNRN-PII/$2.git $repo
+    git clone https://github.com/INGCOM-UNRN-PII/$2.git $repo
 
 
 fi
