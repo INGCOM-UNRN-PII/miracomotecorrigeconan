@@ -1,10 +1,19 @@
 #!/usr/bin/bash
 
-echo "Procesando comentarios de corrección para $1"
+github_repo=https://github.com/INGCOM-UNRN-PII/"$1"/pull/1
+
+printf "Procesando comentarios de corrección para '%s'\n" "$1"
+
+if [ -z "$2" ]; then
+  printf "El formuario no contenia comentario adicional.\n"
+else
+  printf "\n\n### Comentario en el formulario de entrega\n'%s'\n\n" "$2" >> "$1".md
+fi
 
 if [ -f "$1.md" ]; then
-    firefox -new-tab -url "https://github.com/INGCOM-UNRN-PII/$1/pull/1/files" -new-tab -url "`gh pr comment https://github.com/INGCOM-UNRN-PII/$1/pull/1 -F $1.md`"
+    #glow "$1".md
+    firefox -new-tab -url "$github_repo/files" -new-tab -url "$(gh pr comment "$github_repo" -F "$1".md)"
 else
-    echo "El reporte '$1.md' no fue encontrado"
-    echo "Parece que dredd no pasó por acá aún."
+    printf "El reporte '%s.md' no fue encontrado\n" "$1"
+    printf "\tParece que dredd no pasó por acá aún.\n"
 fi
