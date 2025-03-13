@@ -65,4 +65,4 @@ for tp in practicas:
                 informe.write(err_msg)
         stats = f"\n# {tp}:{contador}/{len(archivos)}"
         print(stats)
-        informe.write(stats)
+        informe.write("\n\n")
