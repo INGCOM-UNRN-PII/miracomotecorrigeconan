@@ -4,20 +4,9 @@ printf "Procesando %s-submissions/%s\n" "$1" "$2"
 repo="$1-submissions/$2"
 
 if [ -d "$repo" ]; then
-    printf "git pull en el repositorio '%s'\n" "$repo"
+
+    printf "git restore en el repositorio '%s'\n" "$repo"
     git -C "$repo" restore "*"
-    git -C "$repo" pull
-
-    git_pull_output=$(git -C "$repo" pull 2>&1)
-
-    if [[ $git_pull_output == *"Already up to date."* || $git_pull_output == *"Ya está actualizado."* ]]; then
-        printf "El repositorio ya estaba actualizado.\n"
-    else
-        printf "No se puede continuar, ha ocurrido un error en git.\n"
-        printf "Git dice\n: %s\n" "$git_pull_output"
-        exit 2
-    fi
-
 
         printf "ejecutando verificaciones con gradle wrapper\n"
 
@@ -60,9 +49,6 @@ if [ -d "$repo" ]; then
         printf "para completar el siguiente paso:\n./comment.sh %s\n" "$2"
 
 else
-    printf "Clonando el repositorio si no lo estaba para %s, ejecutar una segunda vez para verificar\n" "$repo"
-    printf "INGCOM-UNRN-PII/%s.git\n" "$2"
-    git clone https://github.com/INGCOM-UNRN-PII/"$2".git "$repo"
-
+    printf "El repositorio '%s no fue encontrado'\n" "$repo"
 
 fi
