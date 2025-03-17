@@ -5,14 +5,11 @@ repo="$1-submissions/$2"
 
 if [ -d "$repo" ]; then
 
-    printf "git restore en el repositorio '%s'\n" "$repo"
-    git -C "$repo" restore "*"
-
         printf "ejecutando verificaciones con gradle wrapper\n"
 
-        cp -fv build.gradle.jacocofix "$repo"/build.gradle  # Hotfix para ignorar el Loader (y activar jacoco donde no exista)
+        cp -fv build.gradle.fix "$repo"/build.gradle  # Hotfix para ignorar el Loader (y activar jacoco donde no exista)
+        ./"$repo"/gradlew -p "$repo" clean
         ./"$repo"/gradlew -p "$repo" check
-        cp -fv build.gradle.base "$repo"/build.gradle     # Desactivamos el Hotfix para no bloquear los pull
 
         printf "creacion del informe\n"
         cat informe/header.md > mensaje.md
