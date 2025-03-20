@@ -21,8 +21,11 @@ if [ -d "$repo" ]; then
     fi
 
     printf "OK\n"
-
 else
     printf "No existia, intentando "
     git clone https://github.com/"$git_repo" "$repo"
 fi
+
+printf "verificar con ./dredd.sh %s %s\n" "$1" "$2"
+
+

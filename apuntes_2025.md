@@ -1,3 +1,6 @@
+Programación 2 - 2025-03-14 - Clase 4
+
+
 TP OK ✅
 Faltaron unos informes, concretamente el de PMD y el reporte
 de ejecución de los tests; esto de todas formas es un detalle menor.
@@ -26,11 +29,23 @@ Solo porque la función, termina con dos puntos de salida diferentes; este y el 
 
 
  ## `0x0007` - La documentación no sigue la forma dada
-```suggestion
+```java
     /**
      * Devuelve el valor absoluto de un número.
-     * @param num el numero a eliminar su signo
+     * @param numero a eliminar su signo
      * @returns el numero sin signo
+     */
+    private static long valorAbsoluto(long numero) {
+```
+
+Versión extendida
+```java
+    /**
+     * Devuelve el valor absoluto de un número.
+     * @param numero a eliminar su signo
+     * @returns el numero sin signo
+     *      POST: se devuelve un valor con el mismo valor
+     *              de numero sin signo.
      */
     private static long valorAbsoluto(long numero) {
 ```
@@ -40,8 +55,7 @@ Solo porque la función, termina con dos puntos de salida diferentes; este y el 
 
 ## `0x000C` - Sin break y continue en su lugar, usen banderas
 
-
-`0x000E` - La estructura de un test individual
+## `0x000E` - El test no sigue la estructura de test indicada
 
 Debe ser, preparar / ejecutar / comprobar / limpiar Con identificación y mensajes
 

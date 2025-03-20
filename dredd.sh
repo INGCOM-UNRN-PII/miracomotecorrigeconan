@@ -31,8 +31,8 @@ if [ -d "$repo" ]; then
             xsltproc stylesheets/junit.xsl "$filename" >> mensaje.md
         done
 
-        printf "\n## Covertura de Tests" >> mensaje.md
-        xsltproc stylesheets/jacoco.xsl "$repo"/build/reports/jacoco/test/jacocoTestReport.xml >> mensaje.md
+#        printf "\n## Covertura de Tests" >> mensaje.md
+#        xsltproc stylesheets/jacoco.xsl "$repo"/build/reports/jacoco/test/jacocoTestReport.xml >> mensaje.md
 
         cat informe/footer.md >> mensaje.md
 
@@ -43,7 +43,8 @@ if [ -d "$repo" ]; then
 
         git -C "$repo" log -n 5 --oneline origin/main
 
-        printf "para completar el siguiente paso:\n./comment.sh %s\n" "$2"
+        printf "para completar el siguiente paso: ./comment.sh %s \"\"\n" "$2"
+        printf "para revisar el comentario antes de cargarlo: glow %s.md\n" "$2"
 
 else
     printf "El repositorio '%s no fue encontrado'\n" "$repo"
