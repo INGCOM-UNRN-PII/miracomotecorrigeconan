@@ -10,15 +10,15 @@ else
   printf "\n\n### Comentario en el formulario de entrega\n'%s'\n\n" "$2" >> "$1".md
 fi
 
-if [ -z "$3" ]; then
-  printf "# La entrega esta fuera de plazo, ⏰\n" >>
+if [ -nz "$3" ]; then
+  printf "\n\n\# La entrega esta fuera de plazo, ⏰\n\n" >> "$1".md
 else
   printf "La entrega es dentro de los plazos establecidos\n"
 fi
 
 if [ -f "$1.md" ]; then
-    glow "$1".md
-    #firefox -new-tab -url "$github_repo/files" -new-tab -url "$(gh pr comment "$github_repo" -F "$1".md)"
+    #glow "$1".md
+    firefox -new-tab -url "$github_repo/files" -new-tab -url "$(gh pr comment "$github_repo" -F "$1".md)"
 else
     printf "El reporte '%s.md' no fue encontrado\n" "$1"
     printf "\tParece que dredd no pasó por acá aún.\n"
