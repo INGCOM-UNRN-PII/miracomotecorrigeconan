@@ -10,10 +10,10 @@ else
   printf "\n\n### Comentario en el formulario de entrega\n'%s'\n\n" "$2" >> "$1".md
 fi
 
-if [ -nz "$3" ]; then
-  printf "\n\n\# La entrega esta fuera de plazo, ⏰\n\n" >> "$1".md
-else
+if [ -z "$3" ]; then
   printf "La entrega es dentro de los plazos establecidos\n"
+else
+  printf "\n\n\# La entrega esta fuera de plazo, ⏰\n\n" >> "$1".md
 fi
 
 if [ -f "$1.md" ]; then
