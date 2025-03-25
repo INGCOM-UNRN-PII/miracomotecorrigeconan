@@ -11,12 +11,15 @@ Revisá los comentarios y preguntá lo que tengas duda.
 
 Tené en cuenta que estos comentarios no pasaran en futuras entregas.
 
+En el próximo TP será necesario que el `main` sea interactivo.
 
 Faltaron unos informes, concretamente el de PMD y el checkstyle; esto de todas formas es un detalle menor.
 
 ¿Y por qué no `boolean`?
 
 ¿Y `Scanner`? Un `main` así, es mas un test que un programa.
+
+Los `assert` van con sus respectivos mensajes, que deben aportar información cuando este falle.
 
 ## `0x0004` - Los nombres de las funciones van en `dromedarioCase`
 
@@ -28,7 +31,7 @@ Faltaron unos informes, concretamente el de PMD y el checkstyle; esto de todas f
 Solo porque la función, termina con dos puntos de salida diferentes; este y el `return` implícito al finalizar la función.
 
 
- ## `0x0007` - La documentación no sigue la forma dada
+## `0x0007` - La documentación no sigue la forma dada
 ```java
     /**
      * Devuelve el valor absoluto de un número.
@@ -62,6 +65,8 @@ Debe ser, preparar / ejecutar / comprobar / limpiar Con identificación y mensaj
 
 https://github.com/INGCOM-UNRN-PII/cursada-2025/blob/main/biblio-secundaria/markdown.pdf
 
+
+El `import` de todo con `*` no es correcto, no vimos el tema para que exista una regla, pero tendremos una.
 
 
 Si el `assert` no obtenemos el resultado esperado, el tema es dejar un mensaje de por qué. Esto no siempre es posible, pero algo que al leer el mensaje en la lista de tests sea fácil de identificar qué pasó.
