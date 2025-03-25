@@ -11,7 +11,12 @@ Revisá los comentarios y preguntá lo que tengas duda.
 
 Tené en cuenta que estos comentarios no pasaran en futuras entregas.
 
-En el próximo TP será necesario que el `main` sea interactivo.
+Los mensajes de Checkstyle en el informe indican que la herramienta de autoformato no fue utilizada. Esto necesitará una reentrega en futuras prácticas.
+
+
+El próximo TP requerirá la utilización de `Scanner` para construir un `main` interactivo.
+
+Esta bandera debiera de ir en el condicional para cerrar el lazo cuando la condición que representa deje de cumplirse.
 
 Faltaron unos informes, concretamente el de PMD y el checkstyle; esto de todas formas es un detalle menor.
 
@@ -31,7 +36,7 @@ Los `assert` van con sus respectivos mensajes, que deben aportar información cu
 Solo porque la función, termina con dos puntos de salida diferentes; este y el `return` implícito al finalizar la función.
 
 
-## `0x0007` - La documentación no sigue la forma dada
+ ## `0x0007` - La documentación no sigue la forma dada
 ```java
     /**
      * Devuelve el valor absoluto de un número.
