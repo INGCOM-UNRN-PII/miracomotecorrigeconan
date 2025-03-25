@@ -77,3 +77,20 @@ El `import` de todo con `*` no es correcto, no vimos el tema para que exista una
 Si el `assert` no obtenemos el resultado esperado, el tema es dejar un mensaje de por qué. Esto no siempre es posible, pero algo que al leer el mensaje en la lista de tests sea fácil de identificar qué pasó.
 
 Esto para simplificar los mensajes y que no sea _tan_ laborioso.
+
+
+####### TP3
+
+Si te fijas, esta función es idéntica en a la otra, solo que más simple.
+Lo único que realmente cambia, son los límites que debieran ser los representables a `int`
+
+```suggestion
+    public static int obtieneEntero(String mensaje, int intentos) throws NoMasIntentosException{
+        return obtieneEntero(mensaje, intentos, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+```
+
+Aunque correcto, siempre es mejor prevenir que atajar, usá `hasNextInt`
+
+
+Recordá lo que vimos con respecto a `String` y las concatenaciones. Para estas situaciones, utilizá [`StringBuffer`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html)
