@@ -110,13 +110,41 @@ provengan de la librería.
 
 ## `0x0018` - Sean específicos con lo que atajan, no está permitido atajar `Exception` o `RuntimeException`
 
+## `0x0019` - La inicialización de los atributos va en el constructor
+
+## `0x002A` - Las clases van en `CamelloCase` y sus atributos en `DromedarioCase`
+
+## `0x02B` - { Los atributos `private` O `protected` con justificación } y nunca `public`
+
+## `0x002C` - Los paquetes deben comenzar en `ar.unrn` e ir en minusculas.
+
+## `0x002D` - Implementar `equals` requiere implementar `hashcode`
+
+## `0x002E` - Al extender, sobreescribir solo para llamar a super no es correcto.
+Excepto con el constructor.
+
+## `0x002F` - Minimizar el código duplicado
+
+## `0x0030` - Las clases, atributos y métodos llevan documentación
+
+## `0x0031` - Los métodos get/set no pueden ser usados para la lógica del problema.
+Esto incluye métodos que conceptualmente tengan la misma función.
+
+## `0x0032` - La utilización de atributos estáticos debe de estar justificada
+
+## `0x0033` - No hacer `import paquete.*`, solo traer lo que se necesita
+
+## `0x0034` - No apilen líneas
+Todos los bloques llevan sus llaves, y no encadenar más de ~dos llamadas a métodos en una línea
+
+
 --- --------nuevas reglas-----------
 
-## `0x0019` - No es correcto declara el lanzamiento de una Excepcion no controlada.
+## `0xF000` - No es correcto declara el lanzamiento de una Excepcion no controlada.
 
 La familia a la que pertenece `ArregloException` no hace que sea correcto declarar su lanzamiento.
 
-## `0x001A` - No está permitido atajar para relanzar sin agregar información útil.
+## `0xF001` - No está permitido atajar para relanzar sin agregar información útil.
 Esto significa que la mayoría de las situaciones en las que se intenta hacer _probablemente_ no sean correctas.
 
 En este caso, se está perdiendo la información acerca del tipo y causa verdadera.
@@ -125,15 +153,15 @@ No está directamente relacionado al I/O, ya que el archivo pudo ser leído corr
 
 
 
-## `0x001B` - Atajar para hacer algun tipo de `print` no es gestionar la excepción.
+## `0xF002` - Atajar para hacer algun tipo de `print` no es gestionar la excepción.
 
-## `0x00` - No esta permitido lanzar excepciones base, `Exception` o `RuntimeException`.
+## `0xF003` - No esta permitido lanzar excepciones base, `Exception` o `RuntimeException`.
 
 
-## `0x00`- Aplicar el principio "mejor prevenir que atajar"
+## `0xF004`- Aplicar el principio "mejor prevenir que atajar" siempre que sea posible.
 Si se puede evitar una excepción con un `if`, es preferible hacerlo.
 
-## `0x00` - A la hora de construir cadenas, usar `StringBuilder`
+## `0xF005` - A la hora de construir cadenas, usar `StringBuilder`
 Recordá lo que vimos con respecto a `String` y las concatenaciones. Para estas situaciones,
 utilizá [`StringBuffer`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/StringBuilder.html)
 
@@ -243,3 +271,14 @@ Quizás debas usar algo como
 Para que pueda procesar archivos creados en cualquier plataforma
 
 [System.lineSeparator()](http://docs.oracle.com/javase/8/docs/api/java/lang/System.html#lineSeparator)
+
+
+
+Debe de ser
+```suggestion
+    @Override
+    public boolean equals(Object arr) {
+```
+y falta `hashCode`
+
+Idealmente, usá `Arrays` y `Objects` para implementar `equals` y `hashCode`
