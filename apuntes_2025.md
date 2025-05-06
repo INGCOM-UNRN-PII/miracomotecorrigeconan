@@ -9,7 +9,7 @@ de ejecución de los tests; esto de todas formas es un detalle menor.
 TP OK ✅
 Revisá los comentarios y preguntá lo que tengas duda.
 
-Tené en cuenta que comentarios como los de la entrega no pasaran en futuras entregas.
+Tené en cuenta que comentarios como los de la entrega no pasarán en futuras entregas.
 
 
 Los mensajes de Checkstyle en el informe indican que la herramienta de autoformato no fue utilizada. Esto necesitará una reentrega en futuras prácticas.
@@ -34,6 +34,8 @@ Los `assert` van con sus respectivos mensajes, que deben aportar información cu
 ## `0x0003` - Los identificadores válidos son solo con alfabéticos `[azAZ]`
 
 ## `0x0004` - Los nombres de las funciones van en `dromedarioCase`
+
+## `0x0004` - Los nombres de los métodos van en `dromedarioCase`
 
 ## `0x0005` - Los identificadores no son descriptivos; o son letras de contexto matemático o son palabras.
 
@@ -112,7 +114,7 @@ provengan de la librería.
 
 ## `0x0019` - La inicialización de los atributos va en el constructor
 
-## `0x002A` - Las clases van en `CamelloCase` y sus atributos en `DromedarioCase`
+## `0x002A` - Las clases van en `CamelloCase` y sus atributos en `dromedarioCase`
 
 ## `0x02B` - { Los atributos `private` O `protected` con justificación } y nunca `public`
 
@@ -136,6 +138,9 @@ Esto incluye métodos que conceptualmente tengan la misma función.
 
 ## `0x0034` - No apilen líneas
 Todos los bloques llevan sus llaves, y no encadenar más de ~dos llamadas a métodos en una línea
+
+## `0x0035` - Documenten el lanzamiento indirecto de excepciones propias.
+En especial, cuando se utilizan métodos internos de verificación.
 
 
 --- --------nuevas reglas-----------
