@@ -204,12 +204,6 @@ Funciones como la verificacion de limites, si algún argumento es valido y demá
 Vamos a ir viendo como Java se presta mucho más que C para esto, pero esto significa que si una línea
 tiene mas de tres llamadas a método hay que dividirla.
 
-## `0x00` - No duplicar en los nombres de los métodos con que tipo trabajan.
-Por ejemplo con arreglos; `sumaArreglo` puede ser simplemente `suma`.
-
-## `0x00` - Al documentar argumentos, no repitan el identificador
-
-
 ## `0x00` - Solo usar `import` a lo que se utiliza, no traer todo junto con `*`
 
 El `import` de todo con `*` no es correcto, no vimos el tema para que exista una regla, pero tendremos una.
@@ -295,7 +289,21 @@ apropiado.
 ## `0xE008` - Los identificadores, no llevan el tipo (o clase) de lo que procesan
 Las funciones no necesitan indicar sobre que trabajan cuando los argumentos que estan a continuación lo indican.
 
-(`sumaArreglo`, debiera de ser `suma`, por ejemplo)
+Por ejemplo con arreglos; `sumaArreglo` puede ser simplemente `suma`.
+
+----------
+CALCULADORA
+
+
+No es el nombre del método apropiado, debe ser `toString` y el mismo no debe de calcular, solo mostrar la «estructura» de la operación.
+
+`toString` no debe calcular, solo mostrar la «estructura» de la operación.
+
+
+Es un detalle supermenor, pero está relacionado con que, a ciencia cierta, nunca vas a saber qué implica calcular el lado derecho, en particular, si esto es costoso en tiempo; por lo que calcularlo una vez no estaría de más.
+
+O; si hay un valor aleatorio mezclado que cambia cada vez que calculas :-)
+
 ----------
 
 
