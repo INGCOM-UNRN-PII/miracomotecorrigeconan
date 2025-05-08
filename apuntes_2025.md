@@ -27,6 +27,12 @@ Faltaron unos informes, concretamente el de PMD y el checkstyle; esto de todas f
 
 Los `assert` van con sus respectivos mensajes, que deben aportar información cuando este falle.
 
+## `0x0000` - Sin errores de ortografía y apliquen formato markdown donde sea posible.
+https://github.com/INGCOM-UNRN-PII/cursada-2025/blob/main/biblio-secundaria/markdown.pdf
+
+NO hay excusas, el IDE tiene corrector de ortografía por lo que typos en los identificadores
+y documentación no seran aceptados.
+
 ## `0x0001` - Los nombres de las class van en `CamelloCase`
 
 ## `0x0002` - Variables, funciones y argumentos van en `dromedarioCase`
@@ -202,16 +208,7 @@ tiene mas de tres llamadas a método hay que dividirla.
 Por ejemplo con arreglos; `sumaArreglo` puede ser simplemente `suma`.
 
 ## `0x00` - Al documentar argumentos, no repitan el identificador
-Redactando de forma que la explicación fluya del mismo, para esto, es necesario que el identificador sea
-apropiado.
 
-
-
-## `0x0000` - Sin errores de ortografía y apliquen formato markdown donde sea posible.
-https://github.com/INGCOM-UNRN-PII/cursada-2025/blob/main/biblio-secundaria/markdown.pdf
-
-NO hay excusas, el IDE tiene corrector de ortografía por lo que typos en los identificadores
-y documentación no seran aceptados.
 
 ## `0x00` - Solo usar `import` a lo que se utiliza, no traer todo junto con `*`
 
@@ -227,7 +224,6 @@ Esto para simplificar los mensajes y que no sea _tan_ laborioso.
 
 Como función y con tipo de retorno, ya sabemos que obtenemos algo.
 
-Las funciones no necesitan indicar sobre que trabajan cuando los argumentos que estan a continuación lo indican.
 
 Esto debiera de estar en una función aparte, ya que se repite en varias funciones.
 Por ejemplo:
@@ -245,28 +241,62 @@ Lo único que realmente cambia, son los límites que debieran ser los representa
     }
 ```
 
-Aunque correcto, siempre es mejor prevenir que atajar, usá `hasNextInt`
-
-No es correcto declarar el lanzamiento de excepciones de esta familia.
-
-Una cosa es que el arreglo esté vacío, pero otra muy diferente es que sea `null`.
 
 Si el arreglo vino 'nulo', no hay arreglo para mostrar, lo cual debiera de ser una excepción.
 
 
-
 Es muy importante ser específico sobre las situaciones que pueden provocar excepciones, lo que describís acá aplica a cualquier función que trabaje con archivos.
 
-Estas superponiendo dos situaciones que, por lo menos, ameritan un mensaje separado
 
 
-Hacer `throws ArregloException` no es correcto dada la familia de excepción a la que pertenece
+## `0xE001` - Mejor prevenir que atajar
+Siempre que sea posible, prevenir la excepcion en lugar de esperar a que falle.
+
+## `0xE002` - Declarar el lanzamiento de una excepcion no controlada es un error.
+
+Hacer `throws RuntimeException` no es correcto por la familia de excepción a la que pertenece.
 
 https://github.com/orgs/INGCOM-UNRN-PII/discussions/53
 
+## `0xE002` - No es correcto concatenar en un lazo.
+
+Ya que esto crea una gran cantidad de instancias de `String`. Usá [`StringBuilder`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuffer.html)
+
+## `0xE003` - La implementación de `hashCode` debe emplear la librería.
+Presente en `Arrays` y `Objects`.
+
+## `0xE004` - La implementación de `equals` debe usar Pattern Matching para el cast
+Esto para simplificar el código y utilizar la forma correcta de downcast seguro.
+
+## `0xE005` - La implementación de `equals` debe ser primero la de `Object`.
+No la de la clase que implementa.
+
+```suggestion
+    @Override
+    public boolean equals(Object arr) {
+```
+## `0xE005` - `equals` y `hashCode` deben ser implementados juntos o no estar.
+Es importante respetar el contrato de estos métodos, el cual declara que la implementación de uno de ellos, implica la implementación del otro.
+
+- [`Object.hashCode()`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#hashCode())
+- [`Object.equals(Object)`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object))
 
 
-La concatenación en un lazo tiene problemas que vimos en clase, es necesaria la utilización de []`StringBuilder`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/StringBuffer.html)
+## `0xE006` - Superposición en el lanzamiento de excepciones
+Estas superponiendo dos situaciones que, por lo menos, ameritan un mensaje separado, e idealmente, dos tipos de excepciones diferentes, de forma
+que se puedan atajar por separado.
+
+Una cosa es que el arreglo esté vacío, pero otra muy diferente es que sea `null`.
+
+## `0xE007` - Al documentar, no se indica el tipo de los argumentos o retorno
+Solo se indica cual es su rol o proposito, redacten de forma que la explicación fluya del mismo, para esto, es necesario que el identificador sea
+apropiado.
+
+## `0xE008` - Los identificadores, no llevan el tipo (o clase) de lo que procesan
+Las funciones no necesitan indicar sobre que trabajan cuando los argumentos que estan a continuación lo indican.
+
+(`sumaArreglo`, debiera de ser `suma`, por ejemplo)
+----------
 
 
 Quizás debas usar algo como
@@ -277,13 +307,3 @@ Para que pueda procesar archivos creados en cualquier plataforma
 
 [System.lineSeparator()](http://docs.oracle.com/javase/8/docs/api/java/lang/System.html#lineSeparator)
 
-
-
-Debe de ser
-```suggestion
-    @Override
-    public boolean equals(Object arr) {
-```
-y falta `hashCode`
-
-Idealmente, usá `Arrays` y `Objects` para implementar `equals` y `hashCode`
