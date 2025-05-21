@@ -6,6 +6,8 @@ Faltaron unos informes, concretamente el de PMD y el reporte
 de ejecución de los tests; esto de todas formas es un detalle menor.
 
 
+
+
 TP OK ✅
 Revisá los comentarios y preguntá lo que tengas duda.
 
@@ -315,3 +317,13 @@ Para que pueda procesar archivos creados en cualquier plataforma
 
 [System.lineSeparator()](http://docs.oracle.com/javase/8/docs/api/java/lang/System.html#lineSeparator)
 
+
+# TP 9
+
+La implementación de `equals` es con igualdad, no con los valores de `hashCode` que no tienen garantías de falsas igualdades.
+
+
+Revisá las búsquedas de la `Agenda`, que están tomando valores de `Contacto` y haciendo esto fuera de la clase que es responsable de la información.
+
+
+Estás comparando las referencias, no su contenido
