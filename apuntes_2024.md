@@ -1,11 +1,4 @@
 
-Necesito construir un cuestionario de 15 preguntas difíciles a desafiantes para un curso de programación orientado a objetos en java, e iremos construyendo preguntas en texto plano, en donde lo que no sea la pregunta en sí y su planteo comienza con // sobre diversos temas. Indica el grado de dificultad estimado, provee una categorización tipo 'tagging' y con un mínimo de 6 opciones. Da la salida como un solo bloque de texto en texto plano. 
-
-
-martinvilu7311
-array731
-
-
 Un recordatorio, las excepciones de la familia `RuntimeException` no se declaran.
 
 Solo se documentan.
