@@ -1,8 +1,6 @@
 
 # Mensajes estandar
 
-
-
 TP OK ✅
 Revisá los comentarios y preguntá lo que tengas duda.
 
@@ -69,7 +67,7 @@ Versión extendida
 ```
 
 ## `0x0008` - Las funciones no van con `printf` o `Scanner`
-
+## `0x0008` - Los métodos no van con `printf` o `Scanner`
 A no ser que sea explícitamente su propósito
 
 ## `0x0009` - Las constantes van en mayúsculas, con `SNAKE_CASE`
@@ -181,10 +179,6 @@ utilizá [`StringBuffer`](https://docs.oracle.com/en/java/javase/21/docs/api/jav
 ## `0x00` - Las clases van en `CamelloCase`
 
 ## `0x00` - Los atributos van en `dromedarioCase`
-
-## `0x00` - Los atributos siempre `private`
-
-Como maximo y debidamente justificado, `protected`. Pero nunca como `public`
 
 ## `0x00` - Los métodos de tipo `getter`/`setter` no estan permitidos
 
@@ -310,7 +304,6 @@ Corregir ⚠️⏰
 
 Usar `operador.equals("-")` es equivalente a ver si un objeto pertenece a una determinada clase, por lo que su uso en `toString` no es correcto; la solución implementada no sigue el principio OCP.
 
-
 LLamar a `toString` es redundante al concatenar
 
 La documentación de esta clase es la más importante de todo el ejercicio, debe establecer qué se debe hacer y qué no en los métodos que deben ser implementados; Debe ser mas que solo describir lo que se ve en el código
@@ -337,13 +330,42 @@ Para que pueda procesar archivos creados en cualquier plataforma
 
 [System.lineSeparator()](http://docs.oracle.com/javase/8/docs/api/java/lang/System.html#lineSeparator)
 
-
-# TP 9
+## TP9
 
 La implementación de `equals` es con igualdad, no con los valores de `hashCode` que no tienen garantías de falsas igualdades.
 
+Revisá las búsquedas de la `Agenda`, que están tomando valores de `Contacto` y haciendo esto fuera de la clase que es responsable de la información, lo que en definitiva, rompe el encapsulamiento.
 
-Revisá las búsquedas de la `Agenda`, que están tomando valores de `Contacto` y haciendo esto fuera de la clase que es responsable de la información.
+Estás comparando las referencias, no su contenido.
 
 
-Estás comparando las referencias, no su contenido
+
+La implementación de búsquedas hecha en la `Agenda` rompe el encapsulamiento de `Contacto`.
+
+Esto debiera de ser una fabrica, para evitar atiborrar el constructor y simplificar la elección del constructor;
+
+
+
+
+
+
+
+Tenés una oportunidad de arreglar este TP haciendo uso de esta guía:
+
+https://github.com/INGCOM-UNRN/github-fork-pr
+
+Que es para crear un fork del repositorio, esto es, una copia en la que son dueños del repositorio para hacer los cambios necesarios y luego solicitar su revisión con el formulario.
+
+Cuando esto esté listo y corregido, volvé a cargarlo en el formulario con el número de PR.
+
+**Importante:** El resultado de las prácticas entregadas por esta vía será solo podrá ser ⚠️ si cumple con lo mínimo esperado o ❌ cuando no.
+
+La corrección no tendrá detalles, solo se dará feedback general.
+
+Y la fecha límite para esto es el 13/6.
+
+
+------------
+
+
+Silenciar una excepción no es la forma de gestionarla.
