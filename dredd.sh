@@ -7,7 +7,22 @@ if [ -d "$repo" ]; then
 
         printf "ejecutando verificaciones con gradle wrapper\n"
 
-#        cp -fv build.gradle.fix "$repo"/build.gradle  # Hotfix para ignorar el Loader (y activar jacoco donde no exista)
+        # Buscar casos de prueba en la carpeta de envíos
+        for test_file in "$1-submissions"/*.java; do
+            if [ -f "$test_file" ]; then
+                # Leer la primera línea para extraer la ruta de destino
+                first_line=$(head -n 1 "$test_file")
+                if [[ "$first_line" == //LOCATION:* ]]; then
+                    location=$(echo "$first_line" | sed 's#^//LOCATION:[[:space:]]*##; s#[[:space:]]*$##' | tr -d '\r')
+                    target_dir="$repo/src/test/java/$location"
+                    
+                    printf "Copiando caso de prueba: %s -> %s\n" "$test_file" "$target_dir"
+                    mkdir -p "$target_dir"
+                    cp -fv "$test_file" "$target_dir/"
+                fi
+            fi
+        done
+
         ./"$repo"/gradlew -p "$repo" clean
         ./"$repo"/gradlew -p "$repo" check
         ./"$repo"/gradlew -p "$repo" analyzeAll
