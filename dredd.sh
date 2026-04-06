@@ -10,6 +10,7 @@ if [ -d "$repo" ]; then
         cp -fv build.gradle.fix "$repo"/build.gradle  # Hotfix para ignorar el Loader (y activar jacoco donde no exista)
         ./"$repo"/gradlew -p "$repo" clean
         ./"$repo"/gradlew -p "$repo" check
+        ./"$repo"/gradlew -p "$repo" analyzeAll
 
         printf "creacion del informe\n"
         cat informe/header.md > mensaje.md
@@ -31,8 +32,8 @@ if [ -d "$repo" ]; then
             xsltproc stylesheets/junit.xsl "$filename" >> mensaje.md
         done
 
-#        printf "\n## Covertura de Tests" >> mensaje.md
-#        xsltproc stylesheets/jacoco.xsl "$repo"/build/reports/jacoco/test/jacocoTestReport.xml >> mensaje.md
+        printf "\n## Covertura de Tests" >> mensaje.md
+        xsltproc stylesheets/jacoco.xsl "$repo"/build/reports/jacoco/test/jacocoTestReport.xml >> mensaje.md
 
         cat informe/footer.md >> mensaje.md
 
