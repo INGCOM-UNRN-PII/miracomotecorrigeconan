@@ -7,7 +7,7 @@ if [ -d "$repo" ]; then
 
         printf "ejecutando verificaciones con gradle wrapper\n"
 
-        cp -fv build.gradle.fix "$repo"/build.gradle  # Hotfix para ignorar el Loader (y activar jacoco donde no exista)
+#        cp -fv build.gradle.fix "$repo"/build.gradle  # Hotfix para ignorar el Loader (y activar jacoco donde no exista)
         ./"$repo"/gradlew -p "$repo" clean
         ./"$repo"/gradlew -p "$repo" check
         ./"$repo"/gradlew -p "$repo" analyzeAll
