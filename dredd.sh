@@ -23,9 +23,9 @@ if [ -d "$repo" ]; then
             fi
         done
 
-        ./"$repo"/gradlew -p "$repo" clean
-        ./"$repo"/gradlew -p "$repo" check
-        ./"$repo"/gradlew -p "$repo" analyzeAll
+        ./"$repo"/gradlew -p "$repo" clean > "$2.log" 2>&1
+        ./"$repo"/gradlew -p "$repo" check >> "$2.log" 2>&1
+        ./"$repo"/gradlew -p "$repo" analyzeAll >> "$2.log" 2>&1
 
         printf "creacion del informe\n"
         cat informe/header.md > mensaje.md
