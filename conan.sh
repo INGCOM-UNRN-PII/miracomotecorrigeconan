@@ -1,7 +1,9 @@
 #!/usr/bin/bash
 
+#./conan.sh tp1-2026 tp1-2026-KaamilDebernardis 
+
 repo="$1-submissions/$2"
-git_repo="INGCOM-UNRN-PII/$2.git"
+git_repo="$3"
 
 printf "Procesando '%s'\n\t'%s'\n\n" "$repo" "$git_repo"
 
@@ -23,7 +25,7 @@ if [ -d "$repo" ]; then
     printf "OK\n"
 else
     printf "No existia, intentando "
-    git clone https://github.com/"$git_repo" "$repo"
+    git clone "$git_repo" "$repo"
 fi
 
 printf "verificar con ./dredd.sh %s %s\n" "$1" "$2"
