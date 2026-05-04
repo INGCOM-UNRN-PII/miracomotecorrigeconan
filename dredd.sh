@@ -37,9 +37,9 @@ if [ -d "$repo" ]; then
             printf "**Repositorio Origin:** %s\n" "$(git -C "$repo" remote get-url origin)"
             printf "**Commit Procesado:** %s\n" "$(git -C "$repo" rev-parse HEAD)"
             printf "\n### Últimos 5 commits:\n"
-            printf "```text\n"
+            printf '```text\n'
             git -C "$repo" log -n 5 --oneline
-            printf "```\n"
+            printf '```\n'
             printf "\n**branch/revision:** %s %s\n" "$(git -C "$repo" rev-parse --abbrev-ref HEAD)" "$(git -C "$repo" rev-parse --short HEAD)"
         } >> mensaje.md
 
@@ -79,14 +79,15 @@ if [ -d "$repo" ]; then
 
         # Collapsible Log with sanitization
         printf "\n\n<details>\n<summary>Log de ejecución de Gradle (Click para expandir)</summary>\n\n" >> mensaje.md
-        printf "```text\n" >> mensaje.md
+        printf '```text\n' >> mensaje.md
         if [ -f "$2.log" ]; then
             # Sanitize: remove ANSI colors, carriage returns
             sed 's/\x1b\[[0-9;]*m//g' "$2.log" | tr -d '\r' >> mensaje.md
         else
             printf "Log no encontrado.\n" >> mensaje.md
         fi
-        printf "\n```\n</details>\n" >> mensaje.md
+        printf '```\n' >> mensaje.md
+        printf "</details>\n" >> mensaje.md
 
         cat informe/footer.md >> mensaje.md
 
