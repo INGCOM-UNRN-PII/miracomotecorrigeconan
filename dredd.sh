@@ -29,33 +29,71 @@ if [ -d "$repo" ]; then
 
         printf "creacion del informe\n"
         cat informe/header.md > mensaje.md
-        printf "\n# El Juez Dredd" >> mensaje.md
-        printf "\n**branch/revision:** %s %s", "$(git -C "$repo" rev-parse --abbrev-ref HEAD)", "$(git -C "$repo" rev-parse --short HEAD)" >> mensaje.md
-        printf "\n## Checkstyle código" >> mensaje.md
-        xsltproc stylesheets/checkstyle.xsl "$repo"/build/reports/checkstyle/main.xml | sed s@"$PWD"/@@ - >> mensaje.md
+        
+        # Repository Details
+        {
+            printf "\n# El Juez Dredd\n"
+            printf "\n## Detalles del Repositorio\n"
+            printf "**Repositorio Origin:** %s\n" "$(git -C "$repo" remote get-url origin)"
+            printf "**Commit Procesado:** %s\n" "$(git -C "$repo" rev-parse HEAD)"
+            printf "\n### Últimos 5 commits:\n"
+            printf "```text\n"
+            git -C "$repo" log -n 5 --oneline
+            printf "```\n"
+            printf "\n**branch/revision:** %s %s\n" "$(git -C "$repo" rev-parse --abbrev-ref HEAD)" "$(git -C "$repo" rev-parse --short HEAD)"
+        } >> mensaje.md
 
-    #    printf "\n## Checkstyle tests" >> mensaje.md
-    #    xsltproc stylesheets/checkstyle.xsl $repo/build/reports/checkstyle/test.xml | sed s@$PWD\/@@ - >> mensaje.md
+        printf "\n## Checkstyle código" >> mensaje.md
+        checkstyle_file="$repo/build/reports/checkstyle/main.xml"
+        if [ -f "$checkstyle_file" ]; then
+            xsltproc --novalid stylesheets/checkstyle.xsl "$checkstyle_file" | sed s@"$PWD"/@@ - >> mensaje.md
+        else
+            printf "\n> ⚠️ Archivo de reporte Checkstyle no encontrado.\n" >> mensaje.md
+        fi
 
         printf "\n## PMD código" >> mensaje.md
-        xsltproc stylesheets/pmd.xsl "$repo"/build/reports/pmd/main.xml | sed s@"$PWD"/@@ - >> mensaje.md
-    #    printf "\n## PMD tests" >> mensaje.md
-    #    xsltproc stylesheets/pmd.xsl $repo/build/reports/pmd/test.xml | sed s@$PWD\/@@ - >> mensaje.md
+        pmd_file="$repo/build/reports/pmd/main.xml"
+        if [ -f "$pmd_file" ]; then
+            xsltproc --novalid stylesheets/pmd.xsl "$pmd_file" | sed s@"$PWD"/@@ - >> mensaje.md
+        else
+            printf "\n> ⚠️ Archivo de reporte PMD no encontrado.\n" >> mensaje.md
+        fi
 
         printf "\n## Conan ejecuta los Tests" >> mensaje.md
-        for filename in "$repo"/build/test-results/test/*.xml; do
-            xsltproc stylesheets/junit.xsl "$filename" >> mensaje.md
-        done
+        test_results_dir="$repo/build/test-results/test"
+        if [ -d "$test_results_dir" ] && [ "$(ls -A "$test_results_dir"/*.xml 2>/dev/null)" ]; then
+            for filename in "$test_results_dir"/*.xml; do
+                xsltproc --novalid stylesheets/junit.xsl "$filename" >> mensaje.md
+            done
+        else
+            printf "\n> ⚠️ No se encontraron resultados de tests JUnit.\n" >> mensaje.md
+        fi
 
         printf "\n## Covertura de Tests" >> mensaje.md
-        xsltproc stylesheets/jacoco.xsl "$repo"/build/reports/jacoco/test/jacocoTestReport.xml >> mensaje.md
+        jacoco_file="$repo/build/reports/jacoco/test/jacocoTestReport.xml"
+        if [ -f "$jacoco_file" ]; then
+            xsltproc --novalid stylesheets/jacoco.xsl "$jacoco_file" >> mensaje.md
+        else
+            printf "\n> ⚠️ Archivo de reporte JaCoCo no encontrado.\n" >> mensaje.md
+        fi
+
+        # Collapsible Log with sanitization
+        printf "\n\n<details>\n<summary>Log de ejecución de Gradle (Click para expandir)</summary>\n\n" >> mensaje.md
+        printf "```text\n" >> mensaje.md
+        if [ -f "$2.log" ]; then
+            # Sanitize: remove ANSI colors, carriage returns
+            sed 's/\x1b\[[0-9;]*m//g' "$2.log" | tr -d '\r' >> mensaje.md
+        else
+            printf "Log no encontrado.\n" >> mensaje.md
+        fi
+        printf "\n```\n</details>\n" >> mensaje.md
 
         cat informe/footer.md >> mensaje.md
 
         printf "Informe listo en %s\n" "$2.md"
         mv mensaje.md "$2".md
 
-        printf "\nbranch: %s \trevision: %s\n", "$(git -C "$repo" rev-parse --abbrev-ref HEAD)", "$(git -C "$repo" rev-parse --short HEAD)"
+        printf "\nbranch: %s \trevision: %s\n" "$(git -C "$repo" rev-parse --abbrev-ref HEAD)" "$(git -C "$repo" rev-parse --short HEAD)"
 
         git -C "$repo" log -n 5 --oneline origin/main
 
